@@ -1,6 +1,5 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { Observable, combineLatest, fromEvent, map, of } from 'rxjs';
-import { Product } from 'src/app/shared/types/product';
 import { CustomInputComponent } from '../custom-input/custom-input.component';
 
 @Component({
@@ -11,13 +10,17 @@ import { CustomInputComponent } from '../custom-input/custom-input.component';
 export class AppComponent implements AfterViewInit {
   combined$: Observable<string> = of('');
   limit: number = 100;
-  productSelectorPadding: number = 10;
 
   @ViewChild(CustomInputComponent, { read: ElementRef }) myInput1!: ElementRef;
   @ViewChild('myInput2', { read: ElementRef }) myInput2!: ElementRef;
 
   constructor() { }
-
+  
+  /**
+   * After view initialized we setup some event handlers manually using only rxjs. 
+   * Listening to input changes on the two inputs, we combine results using combineLatest operator.
+   * @date 8/28/2023 - 5:03:31 PM
+   */
   ngAfterViewInit(): void {
     const onChange1 = fromEvent<any>(this.myInput1.nativeElement, 'input');
     const onChange2 = fromEvent<any>(this.myInput2.nativeElement, 'input');
@@ -25,9 +28,5 @@ export class AppComponent implements AfterViewInit {
       .pipe(map(({ first, second }): any => {
         return `${first.target['value']} - ${second.target['value']}`;
       }));
-  }
-
-  incrementPadding() {
-    this.productSelectorPadding += 1;
   }
 }

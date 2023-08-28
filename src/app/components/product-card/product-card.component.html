@@ -1,7 +1,28 @@
 <div class="product-container">
     <ng-content select="app-product-selector"></ng-content>
-    <ng-content select="button"></ng-content>
-    <div *ngIf="product">
-        Selected: {{ product |json }}
+
+    <div *ngIf="product"
+         style="width: 100%;">
+        <div style="max-height: 300px; overflow-y: auto; padding: 10px;">
+            <app-custom-input [disabled]="true"
+                              [myValue]="product.id"
+                              label="Id" />
+            <app-custom-input [disabled]="true"
+                              [myValue]="product.category"
+                              label="Category" />
+            <app-custom-input [disabled]="true"
+                              [myValue]="product.subcategory"
+                              label="Subcategory" />
+            <app-custom-input [disabled]="true"
+                              [myValue]="product.name"
+                              label="Name" />
+            <app-custom-input [disabled]="true"
+                              [myValue]="product.price"
+                              label="Price" />
+        </div>
+        <button mat-raised-button
+                (click)="increasePrice()">
+            Increase Price
+        </button>
     </div>
 </div>

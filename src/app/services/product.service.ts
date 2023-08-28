@@ -1,11 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../shared/types/product';
 
+/**
+ * Product Service
+ * @date 8/28/2023 - 4:51:48 PM
+ *
+ * @export
+ * @class ProductService
+ * @typedef {ProductService}
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
   constructor() { }
+
+  // Available products
   products: Product[] = [
     {
       "id": "6e2c1da7-eb59-4a59-8ff7-629166dd6f87",

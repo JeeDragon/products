@@ -1,10 +1,20 @@
 import { AfterViewInit, Directive, ElementRef, Input, Renderer2 } from '@angular/core';
 
+/**
+ * Applies margin-bottom to each child node.
+ * @date 8/28/2023 - 4:47:42 PM
+ *
+ * @export
+ * @class AutoMarginDirective
+ * @typedef {AutoMarginDirective}
+ * @implements {AfterViewInit}
+ */
 @Directive({
   selector: '[appAutoMargin]'
 })
 export class AutoMarginDirective implements AfterViewInit {
 
+  // Configurable margin, default is 3px
   @Input('appAutoMargin') arguments: string = '3px';
 
   constructor(

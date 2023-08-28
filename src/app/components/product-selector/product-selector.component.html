@@ -10,16 +10,21 @@
             mat-icon-button>
         <mat-icon>close</mat-icon>
     </button>
-
+    <button mat-icon-button
+            matPrefix
+            (click)="increaseLimit()">
+        <mat-icon>arrow_upward</mat-icon>
+    </button>
     <mat-hint>
         <ng-content select="[myLimit]"></ng-content>
     </mat-hint>
 </mat-form-field>
 <mat-autocomplete #auto="matAutocomplete"
-                  (optionSelected)="onProductSelected($event)">
+                  (optionSelected)="onProductSelected($event)"
+                  [displayWith]="productDisplayFn">
     <mat-option value="-1"></mat-option>
     <mat-option *ngFor="let product of results$ | async; index as i"
-                [value]="product.id">
+                [value]="product">
         <ng-template #defaultTemplateRef>
             <span>{{product.name}}</span>
         </ng-template>
