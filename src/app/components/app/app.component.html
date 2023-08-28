@@ -1,0 +1,111 @@
+<!-- <app-cricut-select>
+  <ng-template let-failure #optionTemplate>
+    <div>
+      <span></span>
+    </div>
+  </ng-template>
+</app-cricut-select> -->
+<!-- <label for="productStatusSelector">Product Status</label>
+<select name="status"
+        id="productStatusSelector"
+        [(ngModel)]="statusId">
+  <option [value]="1">New</option>
+  <option [value]="2">Hold</option>
+  <option [value]="3">Waiting Approval</option>
+  <option [value]="4">Passed</option>
+</select>
+
+<span>my status {{statusId}}</span>
+
+<app-product-card>
+  <app-product-title [product]="myProduct" />
+  <div>
+    Everything Else
+  </div>
+  <app-product-footer>
+    Add to card
+  </app-product-footer>
+</app-product-card> -->
+<div class="myColumn"
+     appAutoMargin="10px">
+  <app-custom-input label="First"
+                    placeholder="First value goes here!"
+                    #myInput1>
+  </app-custom-input>
+  <app-custom-input label="Second"
+                    placeholder="Second value goes here!"
+                    #myInput2>
+  </app-custom-input>
+  <app-custom-input label="Results"
+                    [disabled]="true"
+                    [myValue]="(combined$ | async) ?? ''">
+  </app-custom-input>
+  <app-product-selector style="width: 600px"></app-product-selector>
+  <app-product-selector style="width: 600px"
+                        [limit]="1000"
+                        label="Custom Template Product Search">
+    <ng-template let-product
+                 #optionTemplate>
+      <div>
+        {{ product.name }} - {{ product.subcategory }} - {{ product.price | money }}
+      </div>
+    </ng-template>
+  </app-product-selector>
+  <!-- <p>
+    <b>Results:</b>
+    <span>{{ (combined$ | async) ?? '' }}</span>
+  </p> -->
+</div>
+<label for="productLimitSelector">Product Limit</label>
+<select name="productLimitSelector"
+        id="limitSelector"
+        [(ngModel)]="limit">
+  <option [value]="10">10</option>
+  <option [value]="50">50</option>
+  <option [value]="100">100</option>
+  <option [value]="1000">1000</option>
+</select>
+
+<label>
+  Padding
+  <input type="number"
+         [(ngModel)]="productSelectorPadding">
+</label>
+<button (click)="incrementPadding()">
+  Padding += 1
+</button>
+<app-product-card [product]="productSelect.value">
+  <app-product-selector style="width: 100%; "
+                        [style.padding-top.px]="+productSelectorPadding"
+                        [limit]="limit"
+                        label="Custom Template Product Search"
+                        #productSelect>
+    <b myLimit>Current Limit is: {{limit}}</b>
+    <ng-template let-product
+                 #optionTemplate>
+      <div>
+        {{ product.name }} - {{ product.subcategory }} - {{ product.price | money }}
+      </div>
+    </ng-template>
+  </app-product-selector>
+
+  <button mat-raised-button
+          (click)="incrementPadding()">
+    Padding + 1
+  </button>
+</app-product-card>
+
+<app-product-card [product]="productSelect.value">
+  <app-product-selector style="width: 100%; "
+                        [style.padding-top.px]="+productSelectorPadding"
+                        [limit]="limit"
+                        label="Product Search"
+                        #product2Select>
+    <b myLimit>Current Limit is: {{limit}}</b>
+  </app-product-selector>
+
+  <button mat-raised-button
+          (click)="incrementPadding()">
+    Padding + 1
+  </button>
+</app-product-card>

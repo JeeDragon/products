@@ -1,0 +1,7 @@
+<div class="product-container">
+    <ng-content select="app-product-selector"></ng-content>
+    <ng-content select="button"></ng-content>
+    <div *ngIf="product">
+        Selected: {{ product |json }}
+    </div>
+</div>

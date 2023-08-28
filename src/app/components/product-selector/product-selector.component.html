@@ -1,0 +1,30 @@
+<mat-form-field>
+    <mat-label>{{label}}</mat-label>
+    <input type="text"
+           matInput
+           #productInput
+           (input)="onInputChange(productInput.value)"
+           [matAutocomplete]="auto">
+    <button [@showHide]="currentState"
+            matSuffix
+            mat-icon-button>
+        <mat-icon>close</mat-icon>
+    </button>
+
+    <mat-hint>
+        <ng-content select="[myLimit]"></ng-content>
+    </mat-hint>
+</mat-form-field>
+<mat-autocomplete #auto="matAutocomplete"
+                  (optionSelected)="onProductSelected($event)">
+    <mat-option value="-1"></mat-option>
+    <mat-option *ngFor="let product of results$ | async; index as i"
+                [value]="product.id">
+        <ng-template #defaultTemplateRef>
+            <span>{{product.name}}</span>
+        </ng-template>
+        <ng-container [ngTemplateOutlet]="optionTemplateRef || defaultTemplateRef"
+                      [ngTemplateOutletContext]="{ $implicit: product, index: i}">
+        </ng-container>
+    </mat-option>
+</mat-autocomplete>
